@@ -109,6 +109,9 @@ class home(homeTemplate):
     self.ddm_lang_1.label = mg.ddm_lang_1_change_language[lx]
 
   def next_click(self, **event_args):
+    lx = mg.lang_1
+    where = mg.where
+    where_name = mg.where_name
     """This method is called when the component is clicked."""
     pass
 
@@ -132,6 +135,12 @@ class home(homeTemplate):
 
       
   def ddm_lang_1_change(self, **event_args):
-    mg.lang_1 = int(self.lang_dd_menu.selected_value)
+    mg.lang_1 = int(self.ddm_lang_1.selected_value)
+    lx = mg.lang_1
     ro = app_tables.strings.get(name=mg.where_name)
+    lang1_str = self.get_lang_str(ro, lx)
+    self.lang_1.text = lang1_str
+    self.where.text = str( mg.where)+" | "+str(mg.len_row)
+    self.ddm_lang_1.placeholder = mg.ddm_lang_1_placeholder[lx]
+    self.ddm_lang_1.label = mg.ddm_lang_1_change_language[lx]
     self.lang_1.text = self.get_lang_str(ro, mg.lang_1)
