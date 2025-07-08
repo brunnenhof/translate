@@ -15,13 +15,21 @@ class Form1(Form1Template):
   def admin_pw_pressed_enter(self, **event_args):
     if self.admin_pw.text == 'ft27':
       self.admin_pw.visible = False
-      self.load_panel.visible = False
+      self.load_panel.visible = True
     else:
       self.work_panel.visible = True
 
   def admin_click(self, **event_args):
     """This method is called when the component is clicked."""
     self.admin_pw.visible = True
+
+  def get_str(self, mgl_ln):
+    ln_en = mgl_ln
+    ln_en_1 = ln_en.find('"') + 1
+    lnn = ln_en[ln_en_1:]
+    ln_en_2 = lnn.find('"')
+    lnn = lnn[:ln_en_2]
+    return lnn
 
   def file_loader_1_change(self, file, **event_args):
     print(f"The file's name is: {file.name}")
@@ -51,4 +59,11 @@ class Form1(Form1Template):
         # save into db
       i = i + 1
     alert("All text strings from lu.py have been loaded.")
-    self.load_column_panel.visible = False
+    self.work_panel.visible = True
+
+  def admin_pw_show(self, **event_args):
+    self.admin_pw.focus()
+
+  def ddm_lang_1_change(self, **event_args):
+    """This method is called when an item is selected"""
+    pass

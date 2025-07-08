@@ -5,7 +5,7 @@ components:
     name: admin
     properties: {appearance: elevated, text: Admin}
     type: form:dep_lin1x4oec0ytd:_Components.Button
-  - event_bindings: {pressed_enter: admin_pw_pressed_enter}
+  - event_bindings: {pressed_enter: admin_pw_pressed_enter, show: admin_pw_show}
     layout_properties: {grid_position: 'GTMRVN,TVXIVO'}
     name: admin_pw
     properties: {placeholder: 'Enter admin pw, then press <Enter>', visible: false}
@@ -28,9 +28,39 @@ components:
   name: load_panel
   properties: {col_widths: '{"DNVQFI":20,"DWVIZN":40}', visible: false}
   type: ColumnPanel
-- layout_properties: {grid_position: 'CVPZAD,NVFRGZ'}
+- components:
+  - layout_properties: {grid_position: 'CTDKUA,VNGCWY'}
+    name: lang_1
+    properties: {appearance: outlined, enabled: false, label_bold: true}
+    type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextArea
+  - event_bindings: {change: ddm_lang_1_change}
+    layout_properties: {grid_position: 'CTDKUA,SYSQQO'}
+    name: ddm_lang_1
+    properties: {}
+    type: form:dep_lin1x4oec0ytd:_Components.DropdownMenu
+  - layout_properties: {grid_position: 'BXFHTU,JZONJV'}
+    name: lang2
+    properties: {}
+    type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextArea
+  - layout_properties: {grid_position: 'HVSCMY,WOTVOQ'}
+    name: prev
+    properties: {icon: 'mi:skip_previous', text: Previous}
+    type: form:dep_lin1x4oec0ytd:_Components.Button
+  - layout_properties: {grid_position: 'HVSCMY,EBCUUQ'}
+    name: where
+    properties:
+      align: center
+      bold: true
+      spacing:
+        margin: ['20', null, null, null]
+    type: form:dep_lin1x4oec0ytd:_Components.Text
+  - layout_properties: {grid_position: 'HVSCMY,JNYHUS'}
+    name: next
+    properties: {align: right, icon: 'mi:skip_next', icon_align: right, text: Next}
+    type: form:dep_lin1x4oec0ytd:_Components.Button
+  layout_properties: {grid_position: 'CVPZAD,NVFRGZ'}
   name: work_panel
-  properties: {}
+  properties: {col_widths: '{"VNGCWY":45,"SYSQQO":15}'}
   type: ColumnPanel
 container: {type: ColumnPanel}
 is_package: true
