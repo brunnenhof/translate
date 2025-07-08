@@ -3,6 +3,7 @@ from anvil import *
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
+from .. import mg
 
 class home(homeTemplate):
   def __init__(self, **properties):
@@ -17,10 +18,23 @@ class home(homeTemplate):
     t3 = ("Deutsch - Du", 2)
     t4 = ("Français", 3)
     t5 = ("Norsk-Bokmål", 4)
-    my_lox = 0
-    self.lang_dd_menu.label = "Change the language"
-    self.lang_dd_menu.placeholder = "English"
-    self.lang_dd_menu.items = [t1, t2, t3, t4, t5]
+    self.ddm_lang_1.placeholder = "English"
+    self.ddm_lang_1.items = [t1, t2, t3, t4, t5]
+
+    len_row = len(app_tables.strings.search())
+    mg.len_row = len_row
+    first_row=app_tables.strings.search()[0]
+    tx = first_row['en']
+    self.lang_1.text = tx
+    self.where.text = "1 of "+str(len_row)
+
+  def lang_dd_menu_change(self, **event_args):
+    print(self.lang_dd_menu.selected_value)
+    """This method is called when an item is selected"""
+    print(self.lang_dd_menu.selected_value)
+    my_lox = int(self.lang_dd_menu.selected_value)
+    mg.lx = my_lox
+    self.ddm_lang_1.label = "Select your source language"
 
   def admin_pw_pressed_enter(self, **event_args):
     if self.admin_pw.text == 'ft27':
