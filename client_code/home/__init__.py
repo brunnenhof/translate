@@ -12,6 +12,16 @@ class home(homeTemplate):
 
     # Any code you write here will run before the form opens.
 
+    t1 = ("English", 0)
+    t2 = ("Deutsch - Sie", 1)
+    t3 = ("Deutsch - Du", 2)
+    t4 = ("Français", 3)
+    t5 = ("Norsk-Bokmål", 4)
+    my_lox = 0
+    self.lang_dd_menu.label = "Change the language"
+    self.lang_dd_menu.placeholder = "English"
+    self.lang_dd_menu.items = [t1, t2, t3, t4, t5]
+
   def admin_pw_pressed_enter(self, **event_args):
     if self.admin_pw.text == 'ft27':
       self.admin_pw.visible = False
