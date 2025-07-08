@@ -1,10 +1,10 @@
-from ._anvil_designer import Form1Template
+from ._anvil_designer import homeTemplate
 from anvil import *
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-class Form1(Form1Template):
+class home(homeTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
@@ -17,11 +17,13 @@ class Form1(Form1Template):
       self.admin_pw.visible = False
       self.load_panel.visible = True
     else:
+      self.top_panel.visible = False
       self.work_panel.visible = True
 
   def admin_click(self, **event_args):
     """This method is called when the component is clicked."""
     self.admin_pw.visible = True
+    self.work_panel.visible = False
 
   def get_str(self, mgl_ln):
     ln_en = mgl_ln
@@ -66,4 +68,12 @@ class Form1(Form1Template):
 
   def ddm_lang_1_change(self, **event_args):
     """This method is called when an item is selected"""
+    pass
+
+  def next_click(self, **event_args):
+    """This method is called when the component is clicked."""
+    pass
+
+  def prev_click(self, **event_args):
+    """This method is called when the component is clicked."""
     pass
