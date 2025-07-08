@@ -19,22 +19,17 @@ class home(homeTemplate):
     t3 = ("Deutsch - Du", 2)
     t4 = ("Français", 3)
     t5 = ("Norsk-Bokmål", 4)
-    self.ddm_lang_1.placeholder = "English"
+#    self.ddm_lang_1.placeholder = "English"
     self.ddm_lang_1.items = [t1, t2, t3, t4, t5]
     
     ll = navigator["language"]
     my_loc, my_loc2, lx = self.get_lang(ll)
-
     lx = 3
-
-    
-    len_row = len(app_tables.strings.search())
-    mg.len_row = len_row
-    first_row=app_tables.strings.search()[0]
-    tx = first_row['en']
-    self.lang_1.text = tx
-    self.where.text = "1 | "+str(len_row)
-    self.admin.text = mg.load_tx[lx]
+    mg.lx = lx
+    self.file_loader_1.tooltip = mg.file_loader_tooltip[lx]
+    self.file_loader_1.text = mg.load_tx[lx]
+    self.load_panel.visible = True
+    self.work_panel.visible = False
 
   def get_lang(self, lang):
     p1 = lang.find("-")
@@ -59,19 +54,6 @@ class home(homeTemplate):
     mg.lx = my_lox
     self.ddm_lang_1.label = "Select your source language"
 
-  def admin_pw_pressed_enter(self, **event_args):
-    if self.admin_pw.text == 'ft27':
-      self.admin_pw.visible = False
-      self.load_panel.visible = True
-    else:
-      self.top_panel.visible = False
-      self.work_panel.visible = True
-
-  def admin_click(self, **event_args):
-    """This method is called when the component is clicked."""
-    self.admin_pw.visible = True
-    self.work_panel.visible = False
-
   def get_str(self, mgl_ln):
     ln_en = mgl_ln
     ln_en_1 = ln_en.find('"') + 1
@@ -81,6 +63,7 @@ class home(homeTemplate):
     return lnn
 
   def file_loader_1_change(self, file, **event_args):
+    app_tables.strings.delete_all_rows()
     print(f"The file's name is: {file.name}")
     print(f"The number of bytes in the file is: {file.length}")
     print(f"The file's content type is: {file.content_type}")
@@ -89,15 +72,18 @@ class home(homeTemplate):
     b = file.get_bytes()
     bb = b.decode("utf-8")
     mgl = bb.splitlines()
+    lx = mg.lx
     #    anvil.server.call("upload_csv_pols", bbb, "regs")
     i = 0
+    self.file_loader_1.enabled = False
+    self.file_loader_1.tooltip = ""
     while i < len(mgl):
       ln = mgl[i]
       if ln.find("[") != -1:
         str_na = ln
         str_na_equ = str_na.find('=')
         str_na = str_na[0:str_na_equ].strip()
-        self.load_text.text = "Loading "+str_na
+        self.load_text.text = mg.loading_tx[lx]+str_na
         en = self.get_str(mgl[i+1])
         de_sie = self.get_str(mgl[i+2])
         de_du = self.get_str(mgl[i+3])
@@ -107,15 +93,20 @@ class home(homeTemplate):
         i = i + 6
         # save into db
       i = i + 1
-    alert("All text strings from lu.py have been loaded.")
+    alert(mg.loaded_tx[lx])
     self.work_panel.visible = True
-
-  def admin_pw_show(self, **event_args):
-    self.admin_pw.focus()
-
-  def ddm_lang_1_change(self, **event_args):
-    """This method is called when an item is selected"""
-    pass
+    self.load_panel.visible = False
+    mg.len_row = 0
+    len_row = len(app_tables.strings.search())
+    mg.len_row = len_row
+    first_row=app_tables.strings.search()[0]
+    lang1_str = self.get_lang_str(first_row, lx)
+    mg.where_name = first_row['name']
+    abc = mg.where_name
+    self.lang_1.text = lang1_str
+    self.where.text = "1 | "+str(len_row)
+    self.ddm_lang_1.placeholder = mg.ddm_lang_1_placeholder[lx]
+    self.ddm_lang_1.label = mg.ddm_lang_1_change_language[lx]
 
   def next_click(self, **event_args):
     """This method is called when the component is clicked."""
@@ -124,3 +115,23 @@ class home(homeTemplate):
   def prev_click(self, **event_args):
     """This method is called when the component is clicked."""
     pass
+
+  def get_lang_str(self, ro, lx):
+    if lx == 0:
+      return ro['en']
+    elif lx == 1:
+      return ro['de_sie']
+    elif lx == 2:
+      return ro['de_du']
+    elif lx == 3:
+      return ro['fr_vous']
+    elif lx == 4:
+      return ro['no']
+    else:
+      return ro['en']
+
+      
+  def ddm_lang_1_change(self, **event_args):
+    mg.lang_1 = int(self.lang_dd_menu.selected_value)
+    ro = app_tables.strings.get(name=mg.where_name)
+    self.lang_1.text = self.get_lang_str(ro, mg.lang_1)
