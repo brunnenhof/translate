@@ -1,4 +1,28 @@
 allow_embedding: false
+db_schema:
+  strings:
+    client: none
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: name
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      name: en
+      type: string
+    - admin_ui: {order: 2, width: 200}
+      name: de_sie
+      type: string
+    - admin_ui: {order: 3, width: 200}
+      name: de_du
+      type: string
+    - admin_ui: {order: 4, width: 200}
+      name: fr_vous
+      type: string
+    - admin_ui: {order: 5, width: 200}
+      name: 'no'
+      type: string
+    server: full
+    title: strings
 dependencies:
 - config: {}
   dep_id: dep_lin1x4oec0ytd
