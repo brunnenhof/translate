@@ -4,6 +4,7 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from .. import mg
+from anvil.js.window import navigator
 
 class home(homeTemplate):
   def __init__(self, **properties):
@@ -20,13 +21,35 @@ class home(homeTemplate):
     t5 = ("Norsk-Bokmål", 4)
     self.ddm_lang_1.placeholder = "English"
     self.ddm_lang_1.items = [t1, t2, t3, t4, t5]
+    
+    ll = navigator["language"]
+    my_loc, my_loc2, lx = self.get_lang(ll)
 
+    lx = 3
+
+    
     len_row = len(app_tables.strings.search())
     mg.len_row = len_row
     first_row=app_tables.strings.search()[0]
     tx = first_row['en']
     self.lang_1.text = tx
-    self.where.text = "1 of "+str(len_row)
+    self.where.text = "1 | "+str(len_row)
+    self.admin.text = mg.load_tx[lx]
+
+  def get_lang(self, lang):
+    p1 = lang.find("-")
+    if p1 > 0:
+      lls = lang.split("-")
+      l1 = lls[0]
+      l2 = lls[1]
+    else:
+      l1 = "en"
+      l2 = "US"
+    if l1 in ["en", "de", "fr", "no"]:
+      lox = mg.ln_2_idx[l1]
+    else:
+      lox = 0
+    return l1, l2, lox
 
   def lang_dd_menu_change(self, **event_args):
     print(self.lang_dd_menu.selected_value)

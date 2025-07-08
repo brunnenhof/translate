@@ -10,3 +10,16 @@ from anvil.tables import app_tables
 #
 
 lx = 0
+ln_2_idx = {
+  "en" : 0,
+  "de" : 1,
+  "fr" : 3,
+  "no" : 4
+}
+load_tx = [
+  "Load file",
+  "Datei laden",
+  "Datei laden",
+  "Charger le fichier",
+  "Last inn fil",
+]
