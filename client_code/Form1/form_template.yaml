@@ -1,0 +1,35 @@
+components:
+- components:
+  - event_bindings: {click: admin_click}
+    layout_properties: {grid_position: 'GTMRVN,SHVIPX'}
+    name: admin
+    properties: {appearance: elevated}
+    type: form:dep_lin1x4oec0ytd:_Components.Button
+  - event_bindings: {pressed_enter: admin_pw_pressed_enter}
+    layout_properties: {grid_position: 'GTMRVN,TVXIVO'}
+    name: admin_pw
+    properties: {placeholder: 'Enter admin pw, then press <Enter>', visible: false}
+    type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextBox
+  layout_properties: {grid_position: 'PVLJCB,MCKLHJ'}
+  name: top_panel
+  properties: {}
+  type: ColumnPanel
+- components:
+  - layout_properties: {grid_position: 'CKBHLL,DNVQFI'}
+    name: file_loader_1
+    properties: {}
+    type: form:dep_lin1x4oec0ytd:_Components.FileLoader
+  - layout_properties: {grid_position: 'CKBHLL,DWVIZN'}
+    name: text_1
+    properties: {bold: true}
+    type: form:dep_lin1x4oec0ytd:_Components.Text
+  layout_properties: {grid_position: 'BIZAUA,YFGMON'}
+  name: load_panel
+  properties: {col_widths: '{"DNVQFI":20,"DWVIZN":40}', visible: false}
+  type: ColumnPanel
+- layout_properties: {grid_position: 'CVPZAD,NVFRGZ'}
+  name: work_panel
+  properties: {}
+  type: ColumnPanel
+container: {type: ColumnPanel}
+is_package: true
