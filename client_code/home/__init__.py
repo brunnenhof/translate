@@ -120,7 +120,7 @@ class home(homeTemplate):
         de_du = self.get_str(mgl[i+3])
         fr_vous = self.get_str(mgl[i+4])
         no = self.get_str(mgl[i+5])
-        app_tables.strings.add_row(name=str_na, en=en, de_sie=de_sie, de_du=de_du,fr_vous=fr_vous,no=no)
+        app_tables.strings.add_row(name=str_na, en=en, de_sie=de_sie, de_du=de_du,fr_vous=fr_vous,no=no, usr=mg.usr)
         i = i + 6
         # save into db
       i = i + 1
@@ -140,8 +140,30 @@ class home(homeTemplate):
     self.ddm_lang_1.label = mg.ddm_lang_1_change_language[lx]
     self.lang_1.label = mg.quelltext[lx]
     self.lang_2.label = mg.bearbeitetertext[lx]
-    self.ddm_lang_2.placeholder = mg.ddm_lang_1_placeholder[lx]
-    self.ddm_lang_2.label = mg.ddm_lang_2_change_language[lx]
+    self.ddm_2.placeholder = mg.ddm_lang_1_placeholder[lx]
+    self.ddm_2.label = mg.ddm_lang_2_change_language[lx]
+    lang2_str = self.get_lang_str(first_row, lx)
+    self.lang_2.text = lang2_str
+
+  def load_done(self, lx):
+    self.work_panel.visible = True
+    self.load_panel.visible = False
+    len_row = len(app_tables.strings.search())
+    mg.len_row = len_row
+    first_row=app_tables.strings.search()[0]
+    lang1_str = self.get_lang_str(first_row, lx)
+    mg.where_name = first_row['name']
+    abc = mg.where_name
+    self.lang_1.text = lang1_str
+    self.where.text = "0 | "+str(len_row)
+    self.ddm_lang_1.placeholder = mg.ddm_lang_1_placeholder[lx]
+    self.ddm_lang_1.label = mg.ddm_lang_1_change_language[lx]
+    self.lang_1.label = mg.quelltext[lx]
+    self.lang_2.label = mg.bearbeitetertext[lx]
+    self.ddm_2.placeholder = mg.ddm_lang_1_placeholder[lx]
+    self.ddm_2.label = mg.ddm_lang_2_change_language[lx]
+    lang2_str = self.get_lang_str(first_row, lx)
+    self.lang_2.text = lang2_str
 
   def next_click(self, **event_args):
     lx = mg.lang_1
@@ -168,7 +190,6 @@ class home(homeTemplate):
     else:
       return ro['en']
 
-      
   def ddm_lang_1_change(self, **event_args):
     mg.lang_1 = int(self.ddm_lang_1.selected_value)
     lx = mg.lang_1
