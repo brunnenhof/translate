@@ -60,3 +60,123 @@ ddm_lang_1_change_language = [
   "Changer la langue source",
   "Endre kildespråk",
 ]
+sign_up_title = [
+  "New registration",
+  "Neu registrieren",
+  "Neu registrieren",
+  "Nouvelle inscription",
+  "Ny registrering",
+  "_last_"
+]
+user_placeholder = [
+  "Enter username",
+  "Benutzername",
+  "Benutzername",
+  "Entrez votre nom d'utilisateur",
+  "brukernavn",
+  "_last_"
+]
+save_btn = [
+  "Save",
+  "Speichern",
+  "Speichern",
+  "Enregistrer",
+  "Lagre",
+  "_last_"
+]
+cancel_btn = [
+  "Cancel",
+  "Abbrechen",
+  "Abbrechen",
+  "Annuler",
+  "Avbryt",
+  "_last_"
+]
+regi_first_tx = [
+  "Register, after all?",
+  "Doch erst registrieren?",
+  "Doch erst registrieren?",
+  "Il faut d'abord s'inscrire, après tout ?",
+  "Registrere seg, tross alt?",
+  "_last_"
+]
+login_title_tx = [
+  "Log-in",
+  "Einloggen",
+  "Einloggen",
+  "Se connecter",
+  "Logg inn",
+  "_last_"
+]
+login_u_tx = [
+  "Enter your username",
+  "Benutzernamen eingeben",
+  "Benutzernamen eingeben",
+  "Entrez votre nom d'utilisateur",
+  "Skriv inn brukernavn",
+  "_last_"
+]
+login_first_btn = [
+  "Already registered? Log in",
+  "Bereits registriert? Einloggen",
+  "Bereits registriert? Einloggen",
+  "Déjà inscrit ? Connectez-vous.",
+  "Allerede registrert? Logg inn",
+  "_last_"
+]
+err_user_not_exits = [
+  "A user with this name does not exist",
+  "Ein Benutzer mit diesem Namen existiert nicht.",
+  "Ein Benutzer mit diesem Namen existiert nicht.",
+  "Il n'existe aucun utilisateur portant ce nom.",
+  "Det finnes ingen bruker med dette navnet.",
+  "_last_"
+]
+sorry = [
+  "Sorry - to see you go",
+  "Es tut uns leid, dass Sie gehen",
+  "Es tut uns leid, dass Du gehst",
+  "Désolé de vous voir partir",
+  "Beklager - å se deg gå",
+  "_last_"
+]
+err_username1 = [
+  "The username must be at least 3 chars long",
+  "Der Benutzername muss mindestens 3 Zeichen lang sein.",
+  "Der Benutzername muss mindestens 3 Zeichen lang sein.",
+  "Le nom d'utilisateur doit comporter au moins 3 caractères.",
+  "Brukernavnet må være minst 3 tegn langt",
+  "_last_"
+]
+err_username2 = [
+  "The username cannot be longer than 15 chars",
+  "Der Benutzername darf nicht länger als 15 Zeichen sein.",
+  "Der Benutzername darf nicht länger als 15 Zeichen sein.",
+  "Le nom d'utilisateur ne peut pas dépasser 15 caractères.",
+  "Brukernavnet kan ikke være lengre enn 15 tegn.",
+  "_last_"
+]
+err_username3 = [
+  "You must enter a username",
+  "Sie müssen einen Benutzernamen eingeben.",
+  "Du musst einen Benutzernamen eingeben.",
+  "Vous devez saisir un nom d'utilisateur.",
+  "Du må oppgi et brukernavn",
+  "_last_"
+]
+err_username_exists = [
+  "The username already exists",
+  "Der Benutzername existiert bereits.",
+  "Der Benutzername existiert bereits.",
+  "Le nom d'utilisateur existe déjà.",
+  "Brukernavnet eksisterer allerede",
+  "_last_"
+]
+err_username_alpha = [
+  "The username cannot be all digits",
+  "Der Benutzername darf nicht ausschließlich aus Ziffern bestehen.",
+  "Der Benutzername darf nicht ausschließlich aus Ziffern bestehen.",
+  "Le nom d'utilisateur ne peut pas être composé uniquement de chiffres.",
+  "Brukernavnet kan ikke bestå av bare tall.",
+  "_last_"
+]

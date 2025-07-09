@@ -30,6 +30,7 @@ class home(homeTemplate):
     self.file_loader_1.text = mg.load_tx[lx]
     self.load_panel.visible = True
     self.work_panel.visible = False
+    anvil.users.login_with_form()
 
   def get_lang(self, lang):
     p1 = lang.find("-")
