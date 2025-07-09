@@ -113,6 +113,7 @@ class home(homeTemplate):
     lx = mg.lx
     #    anvil.server.call("upload_csv_pols", bbb, "regs")
     i = 0
+    idx = 0
     self.file_loader_1.enabled = False
     self.file_loader_1.tooltip = ""
     while i < len(mgl):
@@ -127,7 +128,8 @@ class home(homeTemplate):
         de_du = self.get_str(mgl[i+3])
         fr_vous = self.get_str(mgl[i+4])
         no = self.get_str(mgl[i+5])
-        app_tables.strings.add_row(name=str_na, en=en, de_sie=de_sie, de_du=de_du,fr_vous=fr_vous,no=no, usr=mg.usr)
+        app_tables.strings.add_row(name=str_na, en=en, de_sie=de_sie, de_du=de_du,fr_vous=fr_vous,no=no, usr=mg.usr, id=idx)
+        idx = idx + 1
         i = i + 6
         # save into db
       i = i + 1
@@ -139,13 +141,13 @@ class home(homeTemplate):
     self.load_panel.visible = False
     len_row = len(app_tables.strings.search())
     mg.where = where
-    mg.len_row = len_row
+    mg.len_row = len_row - 1
     row=app_tables.strings.search()[where]
     lang1_str = self.get_lang_str(row, lx)
     mg.where_name = row['name']
     abc = mg.where_name
     self.lang_1.text = lang1_str
-    self.where.text = str(where) + " | "+str(len_row)
+    self.where.text = str(where) + " | "+str(mg.len_row)
     self.ddm_lang_1.placeholder = mg.ddm_lang_1_placeholder[lx]
     self.ddm_lang_1.label = mg.ddm_lang_1_change_language[lx]
     self.lang_1.label = mg.quelltext[lx]
@@ -161,18 +163,24 @@ class home(homeTemplate):
     lx1 = mg.lx
     lx2 = mg.lx2
     usr = mg.usr
-    where = mg.where + 1
     abc = mg.len_row
-    if where > mg.len_row:
-      where = 0
     where_name = mg.where_name
     row = app_tables.strings.get(usr=usr, name=where_name)  
-    lang2_str = self.get_lang_str(row, lx2) 
+    id = row['id']
+    where = mg.where + 1
+    if where >= mg.len_row:
+      where = 0
+      row_next = app_tables.strings.get(usr=usr, id=0)
+    else:
+      id = id + 1
+      row_next = app_tables.strings.get(usr=usr, id=id)
+    lang2_str = self.get_lang_str(row_next, lx2) 
     self.lang_2.text = lang2_str
-    lang1_str = self.get_lang_str(row, lx1)
+    lang1_str = self.get_lang_str(row_next, lx1)
     self.lang_1.text = lang1_str
     self.where.text = str(where) + " | " + str(mg.len_row)
     mg.where = where
+    mg.where_name = row_next['name']
     pass
 
   def prev_click(self, **event_args):
@@ -196,7 +204,8 @@ class home(homeTemplate):
   def ddm_lang_1_change(self, **event_args):
     mg.lang_1 = int(self.ddm_lang_1.selected_value)
     lx = mg.lang_1
-    ro = app_tables.strings.get(name=mg.where_name)
+    usr = mg.usr
+    ro = app_tables.strings.get(usr=usr, id=mg.where)
     lang1_str = self.get_lang_str(ro, lx)
     self.lang_1.text = lang1_str
     self.where.text = str( mg.where)+" | "+str(mg.len_row)
@@ -208,7 +217,8 @@ class home(homeTemplate):
   def ddm_2_change(self, **event_args):
     mg.lx2 = int(self.ddm_2.selected_value)
     lx2 = mg.lx2
-    ro = app_tables.strings.get(name=mg.where_name)
+    usr = mg.usr
+    ro = app_tables.strings.get(usr=usr, id=mg.where)
     lang2_str = self.get_lang_str(ro, lx2)
     self.lang_2.text = lang2_str
     self.where.text = str( mg.where)+" | "+str(mg.len_row)

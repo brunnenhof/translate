@@ -47,6 +47,9 @@ db_schema:
     - admin_ui: {order: 6, width: 200}
       name: wo
       type: number
+    - admin_ui: {order: 7, width: 200}
+      name: id
+      type: number
     server: full
     title: strings
 dependencies:
