@@ -28,9 +28,7 @@ class log_reg(log_regTemplate):
     self.login_save.text = mg.login_title_tx[lx]
     self.login_cancel.text = mg.cancel_btn[lx]
     self.login_first.text = mg.login_first_btn[lx]
-    self.regi_info.text = mg.regi_privacy_str[lx]
-
-    self.log_in.visible = False 
+    self.log_panel.visible = False
 
   def get_lang(self, lang):
     p1 = lang.find("-")
@@ -84,12 +82,12 @@ class log_reg(log_regTemplate):
 
   def login_first_click(self, **event_args):
     """This method is called when the component is clicked."""
-    self.log_in.visible = True 
-    self.register.visible = False
+    self.log_panel.visible = True 
+    self.cp_regi.visible = False
 
   def regi_user_change(self, **event_args):
     self.regi_user_err.visible = False
-    lx = mg.my_lang
+    lx = mg.lx
     #    lx = 4
     if len(self.regi_user.text) < 3:
       self.regi_user_err.visible = True
@@ -138,10 +136,8 @@ class log_reg(log_regTemplate):
     """This method is called when the component is clicked."""
 
   def regi_first_click(self, **event_args):
-    self.log_in.visible = False 
-    self.register.visible = True
-    """This method is called when the component is clicked."""
-    pass
+    self.log_panel.visible = False 
+    self.cp_regi.visible = True
 
   def regi_user_show(self, **event_args):
     self.regi_user.focus()
