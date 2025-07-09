@@ -161,3 +161,7 @@ class log_reg(log_regTemplate):
 
   def adm_pw_show(self, **event_args):
     self.adm_pw.focus()
+
+  def button_1_click(self, **event_args):
+    app_tables.nutzer.delete_all_rows()
+    app_tables.strings.delete_all_rows()

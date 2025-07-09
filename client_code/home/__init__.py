@@ -61,6 +61,11 @@ class home(homeTemplate):
       if save_clicked["ur"] == 'up':
         now = datetime.datetime.now()
         row['last_used'] = now
+      len_str = len(app_tables.strings.search())
+      if len_str == 0:
+        pass
+      else:
+        pass
       self.bye_card.visible = False
       self.load_panel.visible = True
       self.load_done(lx, 11)
@@ -206,3 +211,8 @@ class home(homeTemplate):
     self.ddm_2.label = "self.ddm_2.label  " + mg.ddm_lang_2_change_language[lx2]
     self.lang_2.text = self.get_lang_str(ro, mg.lx2)
     self.lang_2.label = mg.bearbeitetertext[lx2]
+
+  def button_1_click(self, **event_args):
+    """This method is called when the component is clicked."""
+    app_tables.nutzer.delete_all_rows()
+    app_tables.strings.delete_all_rows()

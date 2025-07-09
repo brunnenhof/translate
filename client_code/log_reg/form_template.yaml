@@ -65,5 +65,10 @@ components:
   name: cp_regi
   properties: {col_widths: '{"JYTJAX":30,"DUXEZX":30}'}
   type: ColumnPanel
+- event_bindings: {click: button_1_click}
+  layout_properties: {grid_position: 'LREFXH,FQTPJN'}
+  name: button_1
+  properties: {}
+  type: form:dep_lin1x4oec0ytd:_Components.Button
 container: {type: ColumnPanel}
 is_package: true
