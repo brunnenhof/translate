@@ -7,4 +7,5 @@ unique_ids:
   modules:
     mg: '1751977338271641621934963.5498'
   scripts: {}
-  server_modules: {}
+  server_modules:
+    ServerModule1: '1752050494544188731136219.2068'

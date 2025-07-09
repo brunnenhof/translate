@@ -56,7 +56,7 @@ class log_reg(log_regTemplate):
 
   def login_save_click(self, **event_args):
     self.login_err.visible = False
-    lx = mg.my_lang
+    lx = mg.lx
     #    lx = 4
     usr = self.login_u.text
     rows = app_tables.nutzer.search(email=usr)
@@ -74,7 +74,7 @@ class log_reg(log_regTemplate):
 
   def login_cancel_click(self, **event_args):
     self.login_err.visible = False
-    lx = mg.my_lang
+    lx = mg.lx
     #    lx = 3
     self.raise_event("x-close-alert", value=342)
     n = Notification(mg.sorry[lx], style="warning")
@@ -100,7 +100,7 @@ class log_reg(log_regTemplate):
 
   def regi_save_click(self, **event_args):
     """This method is called when the component is clicked."""
-    lx = mg.my_lang
+    lx = mg.lx
     #    lx = 4
     if len(self.regi_user.text) == 0:
       self.regi_user_err.visible = True
@@ -121,14 +121,13 @@ class log_reg(log_regTemplate):
     if row is None:
       res = anvil.server.call('nuts_pwd', usr)
       self.new_user['u'] = usr
-      mg.signup_cancel = False 
       self.raise_event("x-close-alert", value=self.new_user)
     else:
       self.regi_user_err.visible = True
       self.regi_user_err.text = mg.err_username_exists[lx]
 
   def regi_cancel_click(self, **event_args):
-    lx = mg.my_lang
+    lx = mg.lx
     #    lx = 3
     self.raise_event("x-close-alert", value=42)
     n = Notification(mg.sorry[lx], style="warning")
