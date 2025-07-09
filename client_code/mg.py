@@ -13,6 +13,7 @@ from anvil.tables import app_tables
 lx = 0
 where_name = ''
 where = 0
+usr = ''
 ln_2_idx = {
   "en" : 0,
   "de" : 1,
@@ -60,6 +61,13 @@ ddm_lang_1_change_language = [
   "Quellsprache ändern",
   "Changer la langue source",
   "Endre kildespråk",
+]
+ddm_lang_2_change_language = [
+  "Change target language",
+  "Zielsprache ändern",
+  "Zielsprache ändern",
+  "Modifier la langue cible",
+  "Endre målspråk",
 ]
 sign_up_title = [
   "New registration",
@@ -180,4 +188,27 @@ err_username_alpha = [
   "Le nom d'utilisateur ne peut pas être composé uniquement de chiffres.",
   "Brukernavnet kan ikke bestå av bare tall.",
   "_last_"
+]
+bye_tx = [
+  "Thanks for stopping by - maybe another time ...",
+  "Danke für Ihren Besuch – vielleicht ein anderes Mal ...",
+  "Danke für Deinen Besuch – vielleicht ein anderes Mal ...",
+  "Merci d'être passé, peut-être une autre fois...",
+  "Takk for at du kom innom – kanskje en annen gang ...",
+  "Bedankt voor uw bezoek – misschien een andere keer ...",
+  "_last_"
+]
+quelltext = [
+  "Original text",
+  "Quelltext",
+  "Quelltext",
+  "Texte original",
+  "Opprinnelig tekst",
+]
+bearbeitetertext = [
+  "Text for editing",
+  "Text zum Bearbeiten",
+  "Text zum Bearbeiten",
+  "Texte à modifier",
+  "Tekst for redigering",
 ]

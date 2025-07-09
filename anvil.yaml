@@ -12,6 +12,9 @@ db_schema:
     - admin_ui: {order: 2, width: 200}
       name: last_used
       type: datetime
+    - admin_ui: {order: 3, width: 200}
+      name: lx
+      type: number
     server: full
     title: nutzer
   strings:
@@ -54,5 +57,5 @@ services:
 - client_config: {}
   server_config: {}
   source: /runtime/services/tables.yml
-startup: {module: log_reg, type: form}
+startup: {module: home, type: form}
 startup_form: null

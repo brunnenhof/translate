@@ -29,6 +29,7 @@ class log_reg(log_regTemplate):
     self.login_cancel.text = mg.cancel_btn[lx]
     self.login_first.text = mg.login_first_btn[lx]
     self.log_panel.visible = False
+    self.regi_user.focus()    
 
   def get_lang(self, lang):
     p1 = lang.find("-")
@@ -59,12 +60,11 @@ class log_reg(log_regTemplate):
     lx = mg.lx
     #    lx = 4
     usr = self.login_u.text
-    rows = app_tables.nutzer.search(email=usr)
+    rows = app_tables.nutzer.search(usr=usr)
     lenrows = len(rows)
     if len(rows) == 1:
       self.new_user['u'] = self.login_u.text
       self.new_user['ur'] = 'up'
-      mg.signup_cancel = False 
       mg.my_email = self.login_u.text
       self.raise_event("x-close-alert", value=self.new_user)
     elif lenrows == 0:
@@ -84,6 +84,7 @@ class log_reg(log_regTemplate):
     """This method is called when the component is clicked."""
     self.log_panel.visible = True 
     self.cp_regi.visible = False
+    self.login_u.focus()
 
   def regi_user_change(self, **event_args):
     self.regi_user_err.visible = False
@@ -117,7 +118,7 @@ class log_reg(log_regTemplate):
       return
       ## check against database
     usr = self.regi_user.text
-    row = app_tables.nutzer.get(email=usr)
+    row = app_tables.nutzer.get(usr=usr)
     if row is None:
       res = anvil.server.call('nuts_pwd', usr)
       self.new_user['u'] = usr
@@ -137,14 +138,13 @@ class log_reg(log_regTemplate):
   def regi_first_click(self, **event_args):
     self.log_panel.visible = False 
     self.cp_regi.visible = True
+    self.regi_user.focus()
 
   def regi_user_show(self, **event_args):
     self.regi_user.focus()
-    pass
 
   def login_u_show(self, **event_args):
     self.login_u.focus()
-    pass
 
   def adm_pw_pressed_enter(self, **event_args):
     pw = self.adm_pw.text
@@ -158,7 +158,6 @@ class log_reg(log_regTemplate):
     self.adm_card2.visible = True
     self.register.visible = False
     self.log_in.visible = False
-    pass
 
   def adm_pw_show(self, **event_args):
     self.adm_pw.focus()

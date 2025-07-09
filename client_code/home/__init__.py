@@ -5,7 +5,10 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 from .. import mg
+from ..log_reg import log_reg
 from anvil.js.window import navigator
+import datetime
+from datetime import timezone
 
 class home(homeTemplate):
   def __init__(self, **properties):
@@ -31,7 +34,33 @@ class home(homeTemplate):
     self.file_loader_1.text = mg.load_tx[lx]
     self.load_panel.visible = True
     self.work_panel.visible = False
-    anvil.users.login_with_form()
+    new_user = {}
+    save_clicked = alert(
+      content=log_reg(item=new_user),
+      large=True,
+      buttons=[],
+    )
+    if save_clicked == 42 or save_clicked == 342:
+      ### left the app
+      self.bye_card.visible = True
+      self.bye_tx.text = mg.bye_tx[lx]
+      self.file_loader_1.visible = False
+      return
+    elif save_clicked == "admin":
+      self.adm_card.visible = True
+      self.navbar_links.visible = False
+      self.lang_card.visible = False
+      return
+    else:
+      usr = save_clicked["u"]
+      mg.usr = usr
+      row = app_tables.nutzer.get(usr=usr)
+      row["lx"] = lx
+      if save_clicked["ur"] == 'up':
+        now = datetime.datetime.now()
+        row['last_used'] = now
+      self.bye_card.visible = False
+      self.load_panel.visible = True
 
   def get_lang(self, lang):
     p1 = lang.find("-")
@@ -106,9 +135,13 @@ class home(homeTemplate):
     mg.where_name = first_row['name']
     abc = mg.where_name
     self.lang_1.text = lang1_str
-    self.where.text = "1 | "+str(len_row)
+    self.where.text = "0 | "+str(len_row)
     self.ddm_lang_1.placeholder = mg.ddm_lang_1_placeholder[lx]
     self.ddm_lang_1.label = mg.ddm_lang_1_change_language[lx]
+    self.lang_1.label = mg.quelltext[lx]
+    self.lang_2.label = mg.bearbeitetertext[lx]
+    self.ddm_lang_2.placeholder = mg.ddm_lang_1_placeholder[lx]
+    self.ddm_lang_2.label = mg.ddm_lang_2_change_language[lx]
 
   def next_click(self, **event_args):
     lx = mg.lang_1

@@ -1,5 +1,19 @@
 components:
 - components:
+  - components:
+    - layout_properties: {slot: card-content-container-slot}
+      name: bye_tx
+      properties: {align: center, bold: true, font_size: 20, italic: true, scale: large, text_color: darkgreen}
+      type: form:dep_lin1x4oec0ytd:_Components.Text
+    layout_properties: {slot: card-content-slot}
+    name: card_content_container_1
+    properties: {}
+    type: form:dep_lin1x4oec0ytd:_Components.Card.CardContentContainer
+  layout_properties: {grid_position: 'TXNJLC,XPJOIN'}
+  name: bye_card
+  properties: {align: center, visible: false}
+  type: form:dep_lin1x4oec0ytd:_Components.Card
+- components:
   - event_bindings: {change: file_loader_1_change}
     layout_properties: {grid_position: 'CKBHLL,DNVQFI'}
     name: file_loader_1
