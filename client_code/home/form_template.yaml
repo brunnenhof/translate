@@ -44,9 +44,10 @@ components:
     name: lang_2
     properties: {}
     type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextArea
-  - layout_properties: {grid_position: 'BXFHTU,BJVHBJ'}
+  - event_bindings: {change: ddm_2_change}
+    layout_properties: {grid_position: 'BXFHTU,BJVHBJ'}
     name: ddm_2
-    properties: {}
+    properties: {appearance: outlined}
     type: form:dep_lin1x4oec0ytd:_Components.DropdownMenu
   - event_bindings: {click: prev_click}
     layout_properties: {grid_position: 'HVSCMY,WOTVOQ'}

@@ -25,6 +25,7 @@ class home(homeTemplate):
     t5 = ("Norsk-Bokmål", 4)
 #    self.ddm_lang_1.placeholder = "English"
     self.ddm_lang_1.items = [t1, t2, t3, t4, t5]
+    self.ddm_2.items = [t1, t2, t3, t4, t5]
     
     ll = navigator["language"]
     my_loc, my_loc2, lx = self.get_lang(ll)
@@ -192,14 +193,16 @@ class home(homeTemplate):
     self.ddm_lang_1.placeholder = mg.ddm_lang_1_placeholder[lx]
     self.ddm_lang_1.label = mg.ddm_lang_1_change_language[lx]
     self.lang_1.text = self.get_lang_str(ro, mg.lang_1)
+    self.lang_1.label = mg.quelltext[lx]
 
-  def ddm_lang_2_change(self, **event_args):
-    mg.lx2 = int(self.ddm_lang_1.selected_value)
+  def ddm_2_change(self, **event_args):
+    mg.lx2 = int(self.ddm_2.selected_value)
     lx2 = mg.lx2
     ro = app_tables.strings.get(name=mg.where_name)
     lang2_str = self.get_lang_str(ro, lx2)
     self.lang_2.text = lang2_str
     self.where.text = str( mg.where)+" | "+str(mg.len_row)
-    self.ddm_lang_2.placeholder = mg.ddm_lang_1_placeholder[lx2]
-    self.ddm_2.label = mg.ddm_lang_1_change_language[lx2]
-    self.lang_1.text = self.get_lang_str(ro, mg.lx2)
+    self.ddm_2.placeholder = "self.ddm_2.placeholder  " + mg.ddm_lang_1_placeholder[lx2]
+    self.ddm_2.label = "self.ddm_2.label  " + mg.ddm_lang_2_change_language[lx2]
+    self.lang_2.text = self.get_lang_str(ro, mg.lx2)
+    self.lang_2.label = mg.bearbeitetertext[lx2]
