@@ -56,11 +56,13 @@ class home(homeTemplate):
       mg.usr = usr
       row = app_tables.nutzer.get(usr=usr)
       row["lx"] = lx
+      where = row['wo']
       if save_clicked["ur"] == 'up':
         now = datetime.datetime.now()
         row['last_used'] = now
       self.bye_card.visible = False
       self.load_panel.visible = True
+      self.load_done(lx, 11)
 
   def get_lang(self, lang):
     p1 = lang.find("-")
@@ -125,37 +127,19 @@ class home(homeTemplate):
         # save into db
       i = i + 1
     alert(mg.loaded_tx[lx])
-    self.work_panel.visible = True
-    self.load_panel.visible = False
-    mg.len_row = 0
-    len_row = len(app_tables.strings.search())
-    mg.len_row = len_row
-    first_row=app_tables.strings.search()[0]
-    lang1_str = self.get_lang_str(first_row, lx)
-    mg.where_name = first_row['name']
-    abc = mg.where_name
-    self.lang_1.text = lang1_str
-    self.where.text = "0 | "+str(len_row)
-    self.ddm_lang_1.placeholder = mg.ddm_lang_1_placeholder[lx]
-    self.ddm_lang_1.label = mg.ddm_lang_1_change_language[lx]
-    self.lang_1.label = mg.quelltext[lx]
-    self.lang_2.label = mg.bearbeitetertext[lx]
-    self.ddm_2.placeholder = mg.ddm_lang_1_placeholder[lx]
-    self.ddm_2.label = mg.ddm_lang_2_change_language[lx]
-    lang2_str = self.get_lang_str(first_row, lx)
-    self.lang_2.text = lang2_str
+    self.load_done(lx, 0)
 
-  def load_done(self, lx):
+  def load_done(self, lx, where):
     self.work_panel.visible = True
     self.load_panel.visible = False
     len_row = len(app_tables.strings.search())
     mg.len_row = len_row
-    first_row=app_tables.strings.search()[0]
+    first_row=app_tables.strings.search()[where]
     lang1_str = self.get_lang_str(first_row, lx)
     mg.where_name = first_row['name']
     abc = mg.where_name
     self.lang_1.text = lang1_str
-    self.where.text = "0 | "+str(len_row)
+    self.where.text = str(where) + " | "+str(len_row)
     self.ddm_lang_1.placeholder = mg.ddm_lang_1_placeholder[lx]
     self.ddm_lang_1.label = mg.ddm_lang_1_change_language[lx]
     self.lang_1.label = mg.quelltext[lx]
@@ -164,11 +148,19 @@ class home(homeTemplate):
     self.ddm_2.label = mg.ddm_lang_2_change_language[lx]
     lang2_str = self.get_lang_str(first_row, lx)
     self.lang_2.text = lang2_str
+    mg.where = where
 
   def next_click(self, **event_args):
     lx = mg.lang_1
-    where = mg.where
+    lx2 = mg.lx2
+    usr = mg.usr
+    where = mg.where + 1
+    if where > 13:
+      where = 0
     where_name = mg.where_name
+    row = app_tables.strings.get(usr=usr, name=where_name)  
+    lang2_str = self.get_lang_str(row, lx)    
+
     """This method is called when the component is clicked."""
     pass
 
@@ -200,3 +192,14 @@ class home(homeTemplate):
     self.ddm_lang_1.placeholder = mg.ddm_lang_1_placeholder[lx]
     self.ddm_lang_1.label = mg.ddm_lang_1_change_language[lx]
     self.lang_1.text = self.get_lang_str(ro, mg.lang_1)
+
+  def ddm_lang_2_change(self, **event_args):
+    mg.lx2 = int(self.ddm_lang_1.selected_value)
+    lx2 = mg.lx2
+    ro = app_tables.strings.get(name=mg.where_name)
+    lang2_str = self.get_lang_str(ro, lx2)
+    self.lang_2.text = lang2_str
+    self.where.text = str( mg.where)+" | "+str(mg.len_row)
+    self.ddm_lang_2.placeholder = mg.ddm_lang_1_placeholder[lx2]
+    self.ddm_2.label = mg.ddm_lang_1_change_language[lx2]
+    self.lang_1.text = self.get_lang_str(ro, mg.lx2)

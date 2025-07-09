@@ -8,7 +8,7 @@ import datetime
 def nuts_pwd(u):
   ## with hash https://kinsta.com/blog/python-hashing/
   jetzt = datetime.datetime.now()
-  app_tables.nutzer.add_row(usr=u, started=jetzt)
+  app_tables.nutzer.add_row(usr=u, started=jetzt, wo=0)
   return 27
 
 @anvil.server.callable
