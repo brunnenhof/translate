@@ -67,7 +67,7 @@ class home(homeTemplate):
         self.load_panel.visible = True
       else:
         self.load_panel.visible = True
-        self.load_done(lx, 11)
+        self.load_done(lx, where)
 
   def get_lang(self, lang):
     p1 = lang.find("-")
