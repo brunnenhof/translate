@@ -181,6 +181,8 @@ class home(homeTemplate):
     self.where.text = str(where) + " | " + str(mg.len_row)
     mg.where = where
     mg.where_name = row_next['name']
+    ro_nutz = app_tables.nutzer.get(usr=usr)
+    ro_nutz['wo'] = where
     pass
 
   def prev_click(self, **event_args):
