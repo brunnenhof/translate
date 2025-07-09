@@ -61,14 +61,13 @@ class home(homeTemplate):
       if save_clicked["ur"] == 'up':
         now = datetime.datetime.now()
         row['last_used'] = now
+      self.bye_card.visible = False
       len_str = len(app_tables.strings.search())
       if len_str == 0:
-        pass
+        self.load_panel.visible = True
       else:
-        pass
-      self.bye_card.visible = False
-      self.load_panel.visible = True
-      self.load_done(lx, 11)
+        self.load_panel.visible = True
+        self.load_done(lx, 11)
 
   def get_lang(self, lang):
     p1 = lang.find("-")
@@ -139,10 +138,11 @@ class home(homeTemplate):
     self.work_panel.visible = True
     self.load_panel.visible = False
     len_row = len(app_tables.strings.search())
+    mg.where = where
     mg.len_row = len_row
-    first_row=app_tables.strings.search()[where]
-    lang1_str = self.get_lang_str(first_row, lx)
-    mg.where_name = first_row['name']
+    row=app_tables.strings.search()[where]
+    lang1_str = self.get_lang_str(row, lx)
+    mg.where_name = row['name']
     abc = mg.where_name
     self.lang_1.text = lang1_str
     self.where.text = str(where) + " | "+str(len_row)
@@ -152,22 +152,27 @@ class home(homeTemplate):
     self.lang_2.label = mg.bearbeitetertext[lx]
     self.ddm_2.placeholder = mg.ddm_lang_1_placeholder[lx]
     self.ddm_2.label = mg.ddm_lang_2_change_language[lx]
-    lang2_str = self.get_lang_str(first_row, lx)
+    lang2_str = self.get_lang_str(row, lx)
     self.lang_2.text = lang2_str
     mg.where = where
+    mg.lx2 = lx
 
   def next_click(self, **event_args):
-    lx = mg.lang_1
+    lx1 = mg.lx
     lx2 = mg.lx2
     usr = mg.usr
     where = mg.where + 1
-    if where > 13:
+    abc = mg.len_row
+    if where > mg.len_row:
       where = 0
     where_name = mg.where_name
     row = app_tables.strings.get(usr=usr, name=where_name)  
-    lang2_str = self.get_lang_str(row, lx)    
-
-    """This method is called when the component is clicked."""
+    lang2_str = self.get_lang_str(row, lx2) 
+    self.lang_2.text = lang2_str
+    lang1_str = self.get_lang_str(row, lx1)
+    self.lang_1.text = lang1_str
+    self.where.text = str(where) + " | " + str(mg.len_row)
+    mg.where = where
     pass
 
   def prev_click(self, **event_args):

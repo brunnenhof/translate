@@ -11,6 +11,7 @@ from anvil.tables import app_tables
 #
 
 lx = 0
+lx2 = 0
 where_name = ''
 where = 0
 usr = ''
