@@ -57,6 +57,8 @@ class home(homeTemplate):
       mg.usr = usr
       row = app_tables.nutzer.get(usr=usr)
       row["lx"] = lx
+      row["lx2"] = lx
+      lx, lx2 = self.get_lx(usr)
       where = row['wo']
       if save_clicked["ur"] == 'up':
         now = datetime.datetime.now()
@@ -67,7 +69,7 @@ class home(homeTemplate):
         self.load_panel.visible = True
       else:
         self.load_panel.visible = True
-        self.load_done(lx, where)
+        self.load_done(lx, lx2, where)
 
   def get_lang(self, lang):
     p1 = lang.find("-")
@@ -111,6 +113,7 @@ class home(homeTemplate):
     bb = b.decode("utf-8")
     mgl = bb.splitlines()
     lx = mg.lx
+    lx2 = mg.lx2
     #    anvil.server.call("upload_csv_pols", bbb, "regs")
     i = 0
     idx = 0
@@ -134,9 +137,9 @@ class home(homeTemplate):
         # save into db
       i = i + 1
     alert(mg.loaded_tx[lx])
-    self.load_done(lx, 0)
+    self.load_done(lx, lx2, 0)
 
-  def load_done(self, lx, where):
+  def load_done(self, lx, lx2, where):
     self.work_panel.visible = True
     self.load_panel.visible = False
     len_row = len(app_tables.strings.search())
@@ -151,18 +154,21 @@ class home(homeTemplate):
     self.ddm_lang_1.placeholder = mg.ddm_lang_1_placeholder[lx]
     self.ddm_lang_1.label = mg.ddm_lang_1_change_language[lx]
     self.lang_1.label = mg.quelltext[lx]
-    self.lang_2.label = mg.bearbeitetertext[lx]
+    self.lang_2.label = mg.bearbeitetertext[lx2]
     self.ddm_2.placeholder = mg.ddm_lang_1_placeholder[lx]
-    self.ddm_2.label = mg.ddm_lang_2_change_language[lx]
-    lang2_str = self.get_lang_str(row, lx)
+    self.ddm_2.label = mg.ddm_lang_2_change_language[lx2]
+    lang2_str = self.get_lang_str(row, lx2)
     self.lang_2.text = lang2_str
     mg.where = where
-    mg.lx2 = lx
+    mg.lx = lx
+    mg.lx2 = lx2
 
   def next_click(self, **event_args):
     lx1 = mg.lx
     lx2 = mg.lx2
     usr = mg.usr
+    ## get lx , lx2 from nutzer
+    
     abc = mg.len_row
     where_name = mg.where_name
     row = app_tables.strings.get(usr=usr, name=where_name)  
@@ -215,6 +221,8 @@ class home(homeTemplate):
     self.ddm_lang_1.label = mg.ddm_lang_1_change_language[lx]
     self.lang_1.text = self.get_lang_str(ro, mg.lang_1)
     self.lang_1.label = mg.quelltext[lx]
+    ro_nutz = app_tables.nutzer.get(usr=usr)
+    ro_nutz['lx'] = lx
 
   def ddm_2_change(self, **event_args):
     mg.lx2 = int(self.ddm_2.selected_value)
@@ -228,6 +236,8 @@ class home(homeTemplate):
     self.ddm_2.label = "self.ddm_2.label  " + mg.ddm_lang_2_change_language[lx2]
     self.lang_2.text = self.get_lang_str(ro, mg.lx2)
     self.lang_2.label = mg.bearbeitetertext[lx2]
+    ro_nutz = app_tables.nutzer.get(usr=usr)
+    ro_nutz['lx2'] = lx2
 
   def button_1_click(self, **event_args):
     """This method is called when the component is clicked."""
