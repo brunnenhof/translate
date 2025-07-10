@@ -12,15 +12,21 @@ db_schema:
     - admin_ui: {order: 2, width: 200}
       name: last_used
       type: datetime
-    - admin_ui: {order: 3, width: 200}
-      name: lx
-      type: number
-    - admin_ui: {order: 4, width: 200}
+    - admin_ui: {order: 4, width: 106}
       name: wo
       type: number
-    - admin_ui: {order: 5, width: 200}
-      name: lx2
+    - admin_ui: {order: 6, width: 116}
+      name: lxb
       type: number
+    - admin_ui: {order: 7, width: 119}
+      name: lxs
+      type: number
+    - admin_ui: {order: 8, width: 125}
+      name: lxt
+      type: number
+    - admin_ui: {order: 9, width: 124}
+      name: lxtallowed
+      type: simpleObject
     server: full
     title: nutzer
   strings:
